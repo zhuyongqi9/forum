@@ -5,9 +5,9 @@ import java.util.Date;
 
 /**
  * 开发者论坛 user类
- * @Author Frank
  */
 public class User {
+
     private int id;
     private String phone;
     private String pwd;

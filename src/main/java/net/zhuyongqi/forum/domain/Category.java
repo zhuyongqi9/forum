@@ -3,7 +3,7 @@ package net.zhuyongqi.forum.domain;
 import java.util.Date;
 
 /**
- * 关于主题类的初始化
+ * 关于主题分类的类
  */
 public class Category {
     private int id;

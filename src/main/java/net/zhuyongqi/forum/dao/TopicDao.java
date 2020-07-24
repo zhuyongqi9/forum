@@ -14,30 +14,43 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TopicDao {
+
     private QueryRunner queryRunner=new QueryRunner(DataSourceUtil.getDataSource());
 
     //开启驼峰映射
     private BeanProcessor beanProcessor=new GenerousBeanProcessor();
     private RowProcessor processor=new BasicRowProcessor(beanProcessor);
 
+    /**
+     * 查询Category下所有的主题数量
+     * @param cId
+     * @return
+     */
     public int countTotalTopicByCid(int cId) {
+        //查询分类下所有的主题数量
         String sql="select count(*) from topic where c_id=? and `delete`=0";
         Long count=null;
+
         try {
              count=(Long) queryRunner.query(sql,new ScalarHandler<>(),cId);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return count.intValue();
     }
 
-
-
+    /**
+     * 返回当前Category下所有的topic
+     * @param cId
+     * @param from
+     * @param pageSize
+     * @return
+     */
     public List<Topic> findListByCid(int cId, int from, int pageSize) {
-        String sql="select * from topic where c_id=? and `delete` =0 order by update_time desc limit ?,?";
 
+        String sql="select * from topic where c_id=? and `delete` =0 order by update_time desc limit ?,?";
         List<Topic> list=null;
+
         try {
             list=queryRunner.query(sql, new BeanListHandler<>(Topic.class,processor),cId,from,pageSize);
         }catch (Exception e ){
@@ -46,6 +59,11 @@ public class TopicDao {
         return list;
     }
 
+    /**
+     * 通过topicId查找到相应地topic
+     * @param topicId
+     * @return topic
+     */
     public Topic findById(int topicId) {
         String sql="select * from topic where id = ?";
         Topic topic=null;
@@ -58,6 +76,13 @@ public class TopicDao {
         return topic;
     }
 
+    /**
+     * 返回当前topic下所有的reply
+     * @param topicId
+     * @param from
+     * @param pageSize
+     * @return list
+     */
     public List<Reply> findListByTopicId(int topicId, int from, int pageSize) {
         String sql="select * from reply where topic_id=? order by create_time asc limit ?,?";
 
@@ -71,8 +96,14 @@ public class TopicDao {
         return replyList;
     }
 
-
+    /**
+     * 插入新的topic
+     * @param topic
+     * @return
+     * @throws Exception
+     */
     public int save(Topic topic) throws Exception {
+
         String sql="insert into topic(c_id,title,content,pv,user_id,username,user_img,create_time," +
                 "update_time,hot,`delete`) values(?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -89,6 +120,7 @@ public class TopicDao {
           topic.getHot(),
           topic.getDelete()
         };
+
         int i=0;
         try {
             i=queryRunner.update(sql,params);

@@ -6,6 +6,7 @@ import java.util.Date;
  * 关于回复类的初始化
  */
 public class Reply {
+
     private int id;
     private int topicId;
     private int floor;

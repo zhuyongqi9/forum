@@ -4,9 +4,9 @@ import java.util.Date;
 
 /**
  * 开发者论坛 主题类
- *  @Author Frank
  */
 public class Topic {
+
     private int id;
     private int cId;
     private String title;
@@ -17,7 +17,6 @@ public class Topic {
     private String userImg;
     private Date createTime;
     private Date updateTime;
-
     private int hot;
     private int delete;
 
