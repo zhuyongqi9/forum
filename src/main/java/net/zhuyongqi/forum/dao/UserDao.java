@@ -12,7 +12,12 @@ public class UserDao {
     private BeanProcessor beanProcessor=new GenerousBeanProcessor();
     private RowProcessor processor=new BasicRowProcessor(beanProcessor);
 
-
+    /**
+     * 插入新的用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     public int save(User user) throws Exception {
         String sql="insert into user (phone,pwd,sex,img,create_time,role,username) values(?,?,?,?,?,?,?)";
         Object[] params={
@@ -29,6 +34,12 @@ public class UserDao {
         return i;
     }
 
+    /**
+     * 通过手机和密码查找user
+     * @param phone
+     * @param md5pwd
+     * @return
+     */
     public User findByPhonePwd(String phone, String md5pwd) {
         String sql="select * from user where phone=? and pwd=?";
 

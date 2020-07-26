@@ -11,18 +11,18 @@ import java.util.Properties;
  */
 public class DataSourceUtil {
     //新建连接池
-    private static DataSource ds;
+    private static DataSource dataSource;
 
     //静态代码块，优先于构造方法执行
     static {
         try {
             //获得配置文件输入流
             InputStream in=DataSourceUtil.class.getClassLoader().getResourceAsStream("database.properties");
-            Properties p=new Properties();
+            Properties properties=new Properties();
             //加载配置文件流
-            p.load(in);
+            properties.load(in);
             //取得数据库连接池
-            ds= BasicDataSourceFactory.createDataSource(p);
+            dataSource= BasicDataSourceFactory.createDataSource(properties);
         }catch (Exception e){
             e.printStackTrace();
             throw new ExceptionInInitializerError("初始化DBCP失败");
@@ -34,7 +34,7 @@ public class DataSourceUtil {
      * @return 连接池
      */
     public static DataSource getDataSource(){
-        return ds;
+        return dataSource;
     }
 
 }

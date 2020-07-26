@@ -35,7 +35,11 @@ public class ReplyDao {
         return count.intValue();
     }
 
-
+    /**
+     * 插入新的回复
+     * @param reply
+     * @return
+     */
     public int save(Reply reply) {
         String sql="insert into reply (topic_id,floor,content,user_id,username,user_img,create_time,update_time,`delete`)"+
                 "values (?,?,?,?,?,?,?,?,?)";

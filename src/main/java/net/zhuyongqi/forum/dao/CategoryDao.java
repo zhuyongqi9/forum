@@ -16,6 +16,11 @@ public class CategoryDao {
     private BeanProcessor beanProcessor=new GenerousBeanProcessor();
     private RowProcessor processor=new BasicRowProcessor(beanProcessor);
 
+    /**
+     * 通过id查找分类
+     * @param id
+     * @return
+     */
     public Category findById(int id){
         String sql="select * from category where id=?";
 
