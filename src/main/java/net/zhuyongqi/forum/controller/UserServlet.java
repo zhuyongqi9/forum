@@ -19,17 +19,22 @@ public class UserServlet extends BaseServlet{
 
     private UserService userService=new UserServiceImpl();
 
+    /**
+     * 登录方法
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
     public void login(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         String phone=request.getParameter("phone");
         String pwd=request.getParameter("pwd");
 
         User user=userService.login(phone,pwd);
+
         if(user!=null){
-
             request.getSession().setAttribute("loginUser",user);
-
             response.sendRedirect("/topic?method=list&c_id=1");
-
         }else {
             request.setAttribute("msg","用户名或密码不正确");
             request.getRequestDispatcher("/user/login.jsp").forward(request,response);
@@ -42,6 +47,7 @@ public class UserServlet extends BaseServlet{
      * @param response
      */
     public void logout(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        //登录信息失效
         request.getSession().invalidate();
         //页面跳转
         response.sendRedirect("/topic?method=list&c_id=1");
@@ -60,6 +66,7 @@ public class UserServlet extends BaseServlet{
 
         Map<String,String[]> map=request.getParameterMap();
         try {
+            //遍历map中所有的key，如果user中有和key相同的属性，就把value赋值给属性
             BeanUtils.populate(user,map);
         } catch (IllegalAccessException e) {
             e.printStackTrace();

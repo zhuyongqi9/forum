@@ -30,7 +30,7 @@ public class BaseServlet extends HttpServlet {
 
         if(method!=null){
             try {
-                //获得当前被访问的对象的字节码对象，和字节码对象里指定的方法
+                //获得当前被访问的对象的字节码对象
                 Method targetMethod =this.getClass().getMethod(method,HttpServletRequest.class,HttpServletResponse.class);
                 //执行对应的方法
                 targetMethod.invoke(this,req,resp);

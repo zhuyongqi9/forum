@@ -21,10 +21,10 @@ public class TopicServlet extends BaseServlet{
 
     private TopicService topicService=new TopicServiceImpl();
     private CategoryService categoryService=new CategoryServiceImpl();
-    /**
-     * 默认分页大小
-     */
+
+    //默认分页大小
     private static final int pageSize=5;
+
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cId=Integer.parseInt(request.getParameter("c_id"));
 

@@ -31,6 +31,12 @@ public class PageDTO <T>{
      */
     private List<Object> list;
 
+    /**
+     * 构造方法
+     * @param pageNumber
+     * @param pageSize
+     * @param totalRecord
+     */
     public PageDTO(int pageNumber, int pageSize, int totalRecord) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;

@@ -15,7 +15,6 @@ import java.util.List;
 @WebServlet(name = "categoryServlet",urlPatterns = {"/category"})
 public class CategoryServlet extends BaseServlet{
 
-
     private CategoryService categoryService=new CategoryServiceImpl();
     private CategoryServiceImpl categoryService1=new CategoryServiceImpl();
 
