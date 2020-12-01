@@ -24,7 +24,6 @@ public class BaseServlet extends HttpServlet {
         //设置字符的编码
         req.setCharacterEncoding("utf-8");
 
-
         //获取请求方法
         String method=req.getParameter("method");
 

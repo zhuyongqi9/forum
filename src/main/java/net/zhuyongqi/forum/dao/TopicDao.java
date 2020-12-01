@@ -16,7 +16,6 @@ import java.util.List;
 public class TopicDao {
 
     private QueryRunner queryRunner=new QueryRunner(DataSourceUtil.getDataSource());
-
     //开启驼峰映射
     private BeanProcessor beanProcessor=new GenerousBeanProcessor();
     private RowProcessor processor=new BasicRowProcessor(beanProcessor);
@@ -108,7 +107,7 @@ public class TopicDao {
                 "update_time,hot,`delete`) values(?,?,?,?,?,?,?,?,?,?,?)";
 
         Object[] params={
-          topic.getcId(),
+          topic.getCId(),
           topic.getTitle(),
           topic.getContent(),
           topic.getPv(),
